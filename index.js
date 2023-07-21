@@ -22,6 +22,6 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.log("Error Connecting to MongoDB", error.message));
 
-app.listen(process.env.PORT, () =>
-  console.log(`Server started in the port localhost:${process.env.PORT}`)
+app.listen(process.env.PORT || 5000, () =>
+  console.log(`Server started in the port localhost:${process.env.PORT || 5000}`)
 );
