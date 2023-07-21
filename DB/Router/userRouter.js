@@ -65,9 +65,9 @@ router.put("/forgot-password", async (req, res) => {
         text: `Click the link below to reset your password. The link is valid for 10 minutes:\n${link}`, // plain text body
       });
     }
-    main().catch((error)=>{
+    main().catch((error) => {
       console.log(error.message);
-      res.status(400).json({ Error : `${error.message}` })
+      res.status(400).json({ Error: `${error.message}` });
     });
     res.status(200).json({
       message:
@@ -82,6 +82,10 @@ router.put("/forgot-password", async (req, res) => {
 router.put("/reset-password", async (req, res) => {
   try {
     const { token, email, newpassword } = req.body;
+    const find_user = await userModel.findOne({ email });
+    if (!find_user) {
+      return res.status(400).json({ message: "User Not Found" });
+    }
     jwt.verify(token, secret_key, async function (err) {
       if (err) {
         return res.status(400).json({ message: `${err.message}` });
