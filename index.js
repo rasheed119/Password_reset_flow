@@ -17,7 +17,10 @@ app.get("/", (req, res) => {
 
 app.use("/user", userRouter);
 
-mongoose.connect(process.env.mongourl);
+mongoose
+  .connect(process.env.mongourl)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.log("Error Connecting to MongoDB", error.message));
 
 app.listen(process.env.PORT, () =>
   console.log(`Server started in the port localhost:${process.env.PORT}`)
