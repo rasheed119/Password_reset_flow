@@ -73,7 +73,7 @@ router.put("/forgot-password", async (req, res) => {
     });
     res.status(200).json({
       message:
-        "An mail has been sent to your mail , Please check your mail to reset the password",
+        "An reset password link has been sent to your mail , Please check your mail to reset the password",
     });
   } catch (error) {
     console.log(error.message);
