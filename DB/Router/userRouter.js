@@ -65,7 +65,10 @@ router.put("/forgot-password", async (req, res) => {
         text: `Click the link below to reset your password. The link is valid for 10 minutes:\n${link}`, // plain text body
       });
     }
-    main().catch(console.error);
+    main().catch((error)=>{
+      console.log(error.message);
+      res.status(400).json({ Error : `${error.message}` })
+    });
     res.status(200).json({
       message:
         "An mail has been sent to your mail , Please check your mail to reset the password",
